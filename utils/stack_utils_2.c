@@ -6,7 +6,7 @@
 /*   By: mmilicev <mmilicev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 16:43:33 by mmilicev          #+#    #+#             */
-/*   Updated: 2025/04/13 00:42:04 by mmilicev         ###   ########.fr       */
+/*   Updated: 2025/04/13 15:25:17 by mmilicev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,44 @@
 
 int	find_biggest_node(t_stack_list *stack)
 {
-	int				biggest;
-	t_stack_list	*tmp;
+	int	biggest;
 
 	if (!stack)
 		return (0);
-	biggest = 0;
-	tmp = stack;
 	biggest = stack->n;
-	while (tmp)
+	while (stack)
 	{
-		if (tmp->n > biggest)
-			biggest = tmp->n;
-		tmp = tmp->next;
+		if (stack->n > biggest)
+			biggest = stack->n;
+		stack = stack->next;
 	}
 	return (biggest);
+}
+void	set_median(t_stack_list *stack)
+{
+	int				curr_pos;
+	int				median;
+
+	curr_pos = 0;
+	median = stack_len(stack) / 2;
+	while (stack)
+	{
+		if (curr_pos <= median)
+			stack->is_above_med = 1;
+		else
+			stack->is_above_med = 0;
+		curr_pos++;
+		stack = stack->next;
+	}
 }
 void	set_index(t_stack_list **stack)
 {
 	t_stack_list	*tmp;
 	t_stack_list	*curr_n;
 	int				index;
-	int				median;
 
+	set_median(*stack);
 	tmp = *stack;
-	median = stack_len(*stack) / 2;
 	while (tmp)
 	{
 		index = 0;
@@ -50,16 +63,12 @@ void	set_index(t_stack_list **stack)
 			curr_n = curr_n->next;
 		}
 		tmp->index = index;
-		if (tmp->index >= median)
-			tmp->is_above_med = 1;
-		else
-			tmp->is_above_med = 0;
 		tmp = tmp->next;
 	}
 }
 int	take_max_index(t_stack_list *stack)
 {
-	int max;
+	int	max;
 
 	if (!stack)
 		return (0);
@@ -71,4 +80,17 @@ int	take_max_index(t_stack_list *stack)
 		stack = stack->next;
 	}
 	return (max);
+}
+int	find_smallest_node(t_stack_list *stack)
+{
+	int smallest;
+
+	smallest = stack->n;
+	while (stack)
+	{
+		if (stack->n < smallest)
+			smallest = stack->n;
+		stack = stack->next;
+	}
+	return (smallest);
 }

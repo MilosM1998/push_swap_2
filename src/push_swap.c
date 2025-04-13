@@ -6,7 +6,7 @@
 /*   By: mmilicev <mmilicev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 22:39:41 by mmilicev          #+#    #+#             */
-/*   Updated: 2025/04/13 01:22:09 by mmilicev         ###   ########.fr       */
+/*   Updated: 2025/04/13 17:41:27 by mmilicev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ void	sort_stack(t_stack_list **a, t_stack_list **b)
 		sa(a);
 	else if (size == 3 && !is_sorted(*a))
 		sort_3(a);
+	else if (size <= 5 && !is_sorted(*a))
+		sort_4_5(a, b);
 	else
-		sort(a, b);
+		sort_big(a, b);
 }
 int	main(int ac, char **av)
 {
@@ -60,13 +62,13 @@ int	main(int ac, char **av)
 		av++;
 	init_stack(&a, av, is_split);
 	sort_stack(&a, &b);
-	t_stack_list *curr;
+	/* t_stack_list *curr;
 	curr = a;
 	while (curr)
 	{
 		ft_printf("%d->", curr->n);
 		curr = curr->next;
-	}
+	} */
 	free_stack(&a);
 	return (0);
 }
