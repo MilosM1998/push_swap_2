@@ -6,7 +6,7 @@
 /*   By: mmilicev <mmilicev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 16:43:33 by mmilicev          #+#    #+#             */
-/*   Updated: 2025/04/13 15:25:17 by mmilicev         ###   ########.fr       */
+/*   Updated: 2025/04/14 21:55:15 by mmilicev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,15 @@ void	set_index(t_stack_list **stack)
 {
 	t_stack_list	*tmp;
 	t_stack_list	*curr_n;
+	int 			i;
 	int				index;
 
+	i = 0;
 	set_median(*stack);
 	tmp = *stack;
 	while (tmp)
 	{
+		tmp->curr_pos = i;
 		index = 0;
 		curr_n = *stack;
 		while (curr_n)
@@ -63,6 +66,7 @@ void	set_index(t_stack_list **stack)
 			curr_n = curr_n->next;
 		}
 		tmp->index = index;
+		i++;
 		tmp = tmp->next;
 	}
 }

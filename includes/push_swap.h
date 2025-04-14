@@ -6,7 +6,7 @@
 /*   By: mmilicev <mmilicev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 22:39:48 by mmilicev          #+#    #+#             */
-/*   Updated: 2025/04/13 17:34:34 by mmilicev         ###   ########.fr       */
+/*   Updated: 2025/04/14 21:50:51 by mmilicev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,12 @@
 typedef struct s_stack_list
 {
 	int					index;
+	int					curr_pos;
 	int					n;
 	int					is_above_med;
+	int					cost;
 	struct s_stack_list	*next;
+	struct s_stack_list *target;
 }						t_stack_list;
 
 // 						operations
@@ -45,11 +48,12 @@ void					init_stack(t_stack_list **stack, char **av,
 							int is_split);
 void					set_index(t_stack_list **stack);
 int						find_smallest_node(t_stack_list *stack);
-
 int						find_biggest_node(t_stack_list *stack);
 int						stack_len(t_stack_list *stack);
 int						take_max_index(t_stack_list *stack);
 void					set_median(t_stack_list *stack);
+int						how_many_chunks(int stack_size);
+int						get_curr_position(t_stack_list *stack, int n);
 
 //						checkers
 int						check_if_dup(t_stack_list **stack, long n);
