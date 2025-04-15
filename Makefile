@@ -15,7 +15,7 @@ LIBFT = ./libft/libft.a
 
 OP_SRC = ./operations/swap.c ./operations/push.c ./operations/rotate.c ./operations/reverse_rotate.c
 UTILS_DIR = ./utils/stack_utils.c ./utils/checker.c ./utils/errors.c ./utils/init_stack.c ./utils/stack_utils_2.c \
-./utils/sort_stack.c ./utils/sorting_utils.c
+./utils/sort_stack.c ./utils/sorting_utils.c ./utils/push_b_to_a.c
 
 
 SRC = ./src/push_swap.c $(OP_SRC) $(UTILS_DIR)

@@ -6,7 +6,7 @@
 /*   By: mmilicev <mmilicev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 17:23:54 by mmilicev          #+#    #+#             */
-/*   Updated: 2025/04/14 21:06:57 by mmilicev         ###   ########.fr       */
+/*   Updated: 2025/04/15 22:50:27 by mmilicev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	take_index_position(t_stack_list *stack, int index)
 	return (-1);
 }
 
-int	is_in_chunk(t_stack_list *stack, int max, int min)
+static int	is_in_chunk(t_stack_list *stack, int max, int min)
 {
 	while (stack)
 	{
@@ -53,7 +53,7 @@ int	is_in_chunk(t_stack_list *stack, int max, int min)
 	return (0);
 }
 
-int	take_chunk_pos(t_stack_list *stack, int max, int min)
+static int	take_chunk_pos(t_stack_list *stack, int max, int min)
 {
 	int	pos;
 
@@ -62,7 +62,7 @@ int	take_chunk_pos(t_stack_list *stack, int max, int min)
 	{
 		if (stack->index >= min && stack->index <= max)
 			return (pos);
-        pos++;
+		pos++;
 		stack = stack->next;
 	}
 	return (-1);

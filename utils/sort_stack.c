@@ -6,7 +6,7 @@
 /*   By: mmilicev <mmilicev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 17:09:10 by mmilicev          #+#    #+#             */
-/*   Updated: 2025/04/14 21:08:43 by mmilicev         ###   ########.fr       */
+/*   Updated: 2025/04/15 23:33:31 by mmilicev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,19 @@ void	sort_4_5(t_stack_list **a, t_stack_list **b)
 		push(b, a, 'a');
 	push(b, a, 'a');
 }
+static void finish_sort(t_stack_list **a)
+{
+	int min;
+
+	min = find_smallest_node(*a);
+	while((*a)->n != min)
+	{
+		if(get_curr_position(*a, min) <= stack_len(*a) / 2)
+			rotate(a, 'a');
+		else
+			rev_rotate(a, 'a');
+	}
+}
 void	sort_big(t_stack_list **a, t_stack_list **b)
 {
 	int	stack_size;
@@ -80,12 +93,13 @@ void	sort_big(t_stack_list **a, t_stack_list **b)
 	set_index(a);
 	while (stack_size-- > 3)
 	{
-		push_to_b(a, b, chunk_max, chunk_min);
+		push_chunk_to_b(a, b, chunk_max, chunk_min);
 		chunk_max += chunk_count;
 		chunk_min += chunk_count;
 	}
 	sort_3(a);
-	set_index(*a);
-	set_index(*b);
-	push_back_to_a(*a, b);
+	set_index(a);
+	set_index(b);
+	push_b_to_a(a, b);
+	finish_sort(a);
 }

@@ -6,7 +6,7 @@
 /*   By: mmilicev <mmilicev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 22:39:41 by mmilicev          #+#    #+#             */
-/*   Updated: 2025/04/13 17:41:27 by mmilicev         ###   ########.fr       */
+/*   Updated: 2025/04/15 23:31:48 by mmilicev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ int	main(int ac, char **av)
 		av++;
 	init_stack(&a, av, is_split);
 	sort_stack(&a, &b);
-	/* t_stack_list *curr;
+	t_stack_list *curr;
 	curr = a;
 	while (curr)
 	{
 		ft_printf("%d->", curr->n);
 		curr = curr->next;
-	} */
+	}
 	free_stack(&a);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mmilicev <mmilicev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 16:43:33 by mmilicev          #+#    #+#             */
-/*   Updated: 2025/04/14 21:55:15 by mmilicev         ###   ########.fr       */
+/*   Updated: 2025/04/15 23:10:45 by mmilicev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	find_biggest_node(t_stack_list *stack)
 }
 void	set_median(t_stack_list *stack)
 {
-	int				curr_pos;
-	int				median;
+	int	curr_pos;
+	int	median;
 
 	curr_pos = 0;
 	median = stack_len(stack) / 2;
@@ -48,7 +48,7 @@ void	set_index(t_stack_list **stack)
 {
 	t_stack_list	*tmp;
 	t_stack_list	*curr_n;
-	int 			i;
+	int				i;
 	int				index;
 
 	i = 0;
@@ -87,6 +87,8 @@ int	take_max_index(t_stack_list *stack)
 }
 int	find_smallest_node(t_stack_list *stack)
 {
+	if (!stack)
+		return (0);
 	int smallest;
 
 	smallest = stack->n;
