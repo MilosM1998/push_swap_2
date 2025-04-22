@@ -63,18 +63,13 @@ static t_stack_list	*find_low_cost_node(t_stack_list *b)
 {
 	t_stack_list	*low_cost_node;
 	int				cost;
-	
+
 	if (!b)
 		return (NULL);
 	low_cost_node = NULL;
 	cost = INT_MAX;
 	while (b)
 	{
-		if(!b->target)
-		{
-			b = b->next;
-			continue;
-		}
 		if (b->cost < cost)
 		{
 			cost = b->cost;
@@ -84,6 +79,7 @@ static t_stack_list	*find_low_cost_node(t_stack_list *b)
 	}
 	return (low_cost_node);
 }
+
 static void	prepare_for_push(t_stack_list *a, t_stack_list *b)
 {
 	t_stack_list	*tmp;
@@ -96,6 +92,16 @@ static void	prepare_for_push(t_stack_list *a, t_stack_list *b)
 		tmp = tmp->next;
 	}
 }
+static void	rotate_stacks(t_stack_list **a, t_stack_list **b, int pos_a,
+		int pos_b, t_stack_list *low_cost_node)
+{
+	if (pos_b <= stack_len(*b) / 2 && pos_a <= stack_len(*a) / 2)
+		while (*a != low_cost_node->target && *b != low_cost_node)
+			rr(a, b);
+	if (pos_a > stack_len(*a) / 2 && pos_b > stack_len(*b) / 2)
+		while (*a != low_cost_node->target && *b != low_cost_node)
+			rev_rotate_both(a, b);
+}
 static void	find_and_rotate(t_stack_list **a, t_stack_list **b)
 {
 	t_stack_list	*low_cost_node;
@@ -103,32 +109,24 @@ static void	find_and_rotate(t_stack_list **a, t_stack_list **b)
 	int				low_cost_node_pos_a;
 
 	low_cost_node = find_low_cost_node(*b);
-	if(!low_cost_node || !low_cost_node->target)
+	if (!low_cost_node || !low_cost_node->target)
 		return ;
 	low_cost_node_pos_b = get_curr_position(*b, low_cost_node->n);
 	low_cost_node_pos_a = get_curr_position(*a, low_cost_node->target->n);
-	if (low_cost_node_pos_b <= stack_len(*b) / 2
-		&& low_cost_node_pos_a <= stack_len(*a) / 2)
-		while (*a != low_cost_node->target && *b != low_cost_node)
-			rr(a, b);
-	else if (low_cost_node_pos_a > stack_len(*a) / 2
-		&& low_cost_node_pos_b > stack_len(*b) / 2)
-		while (*a != low_cost_node->target && *b != low_cost_node)
-			rev_rotate_both(a, b);
-	// else if (low_cost_node_pos_a <= stack_len(*a) / 2
-	// 	&& low_cost_node_pos_b > stack_len(*b) / 2)
-	// 	while (*a != low_cost_node->target && *b != low_cost_node)
-	// 	{
-	// 		rotate(a, 'a');
-	// 		rev_rotate(b, 'b');
-	// 	}
-	// else if (low_cost_node_pos_a > stack_len(*a) / 2
-	// 	&& low_cost_node_pos_b <= stack_len(*b) / 2)
-	// 	while (*a != low_cost_node->target && *b != low_cost_node)
-	// 	{
-	// 		rev_rotate(a, 'a');
-	// 		rotate(b, 'b');
-	// 	}
+	rotate_stacks(a, b, low_cost_node_pos_a, low_cost_node_pos_b,
+		low_cost_node);
+	if (get_curr_position(*b, low_cost_node->n) <= stack_len(*b) / 2)
+		while (*b != low_cost_node)
+			rotate(b, 'b');
+	if (get_curr_position(*b, low_cost_node->n) > stack_len(*b) / 2)
+		while (*b != low_cost_node)
+			rev_rotate(b, 'b');
+	if (get_curr_position(*a, low_cost_node->target->n) <= stack_len(*a) / 2)
+		while (*a != low_cost_node->target)
+			rotate(a, 'a');
+	if (get_curr_position(*a, low_cost_node->target->n) > stack_len(*a) / 2)
+		while (*a != low_cost_node->target)
+			rev_rotate(a, 'a');
 }
 void	push_b_to_a(t_stack_list **a, t_stack_list **b)
 {
@@ -138,6 +136,5 @@ void	push_b_to_a(t_stack_list **a, t_stack_list **b)
 		find_and_rotate(a, b);
 		push(b, a, 'a');
 		set_index(a);
-		set_index(b);
 	}
 }

@@ -64,14 +64,27 @@ void	sort_4_5(t_stack_list **a, t_stack_list **b)
 		push(b, a, 'a');
 	push(b, a, 'a');
 }
+static int take_min_index(t_stack_list *stack)
+{
+	int min_index;
+	
+	min_index = INT_MAX;
+	while(stack)
+	{
+		if(stack->index < min_index)
+			min_index = stack->index;
+		stack = stack->next;
+	}
+	return min_index;
+}
 static void finish_sort(t_stack_list **a)
 {
-	int min;
+	int min_index;
 
-	min = find_smallest_node(*a);
-	while((*a)->n != min)
+	min_index = take_min_index(*a);
+	while((*a)->index != min_index)
 	{
-		if(get_curr_position(*a, min) <= stack_len(*a) / 2)
+		if(get_curr_position(*a, min_index) <= stack_len(*a) / 2)
 			rotate(a, 'a');
 		else
 			rev_rotate(a, 'a');
@@ -80,22 +93,27 @@ static void finish_sort(t_stack_list **a)
 void	sort_big(t_stack_list **a, t_stack_list **b)
 {
 	int	stack_size;
-	int	chunk_count;
 	int chunk_size;
 	int	chunk_max;
 	int	chunk_min;
 	
 	stack_size = stack_len(*a);
-	chunk_count = stack_size / how_many_chunks(stack_size);
-	chunk_size = stack_size / chunk_count;
-	chunk_max = chunk_count - 1;
+	chunk_size = stack_size / how_many_chunks(stack_size);
+	chunk_max = chunk_size - 1;
 	chunk_min = 0;
 	set_index(a);
 	while (stack_size-- > 3)
 	{
 		push_chunk_to_b(a, b, chunk_max, chunk_min);
-		chunk_max += chunk_count;
-		chunk_min += chunk_count;
+		chunk_max += chunk_size;
+		chunk_min += chunk_size;
+	}
+	t_stack_list *curr;
+	curr = *a;
+	while (curr)
+	{
+		ft_printf("%d->", curr->n);
+		curr = curr->next;
 	}
 	sort_3(a);
 	set_index(a);
