@@ -12,19 +12,35 @@
 
 #include "../includes/push_swap.h"
 
+static t_stack_list	*take_min(t_stack_list *stack)
+{
+	t_stack_list	*min_node;
+	long			min_n;
+
+	min_n = LONG_MAX;
+	min_node = NULL;
+	if (!stack)
+		return (NULL);
+	while (stack)
+	{
+		if (stack->n < min_n)
+		{
+			min_n = stack->n;
+			min_node = stack;
+		}
+		stack = stack->next;
+	}
+	return (min_node);
+}
 static void	set_targets(t_stack_list *a, t_stack_list *b)
 {
 	int				closest_bigger;
-	int				smallest_n;
-	t_stack_list	*smallest;
 	t_stack_list	*target;
 	t_stack_list	*tmp;
 
 	tmp = a;
-	closest_bigger = find_biggest_node(tmp);
-	smallest_n = find_smallest_node(tmp);
+	closest_bigger = INT_MAX;
 	target = NULL;
-	smallest = NULL;
 	while (tmp)
 	{
 		if (tmp->n > b->n && tmp->n < closest_bigger)
@@ -32,12 +48,10 @@ static void	set_targets(t_stack_list *a, t_stack_list *b)
 			target = tmp;
 			closest_bigger = tmp->n;
 		}
-		if (tmp->n == smallest_n)
-			smallest = tmp;
 		tmp = tmp->next;
 	}
-	if (!target)
-		b->target = smallest;
+	if (closest_bigger == INT_MAX)
+		b->target = find_smallest_node(a);
 	else
 		b->target = target;
 }
@@ -59,6 +73,7 @@ static void	calculate_cost(t_stack_list *a, t_stack_list *b)
 	else
 		b->cost = b->cost + stack_len(a) - pos_a;
 }
+
 static t_stack_list	*find_low_cost_node(t_stack_list *b)
 {
 	t_stack_list	*low_cost_node;
@@ -127,6 +142,7 @@ static void	find_and_rotate(t_stack_list **a, t_stack_list **b)
 	if (get_curr_position(*a, low_cost_node->target->n) > stack_len(*a) / 2)
 		while (*a != low_cost_node->target)
 			rev_rotate(a, 'a');
+	set_index(a);
 }
 void	push_b_to_a(t_stack_list **a, t_stack_list **b)
 {

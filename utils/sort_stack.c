@@ -102,7 +102,7 @@ void	sort_big(t_stack_list **a, t_stack_list **b)
 	chunk_max = chunk_size - 1;
 	chunk_min = 0;
 	set_index(a);
-	while (stack_size-- > 3)
+	while (stack_size-- > 3 && !is_sorted(*a))
 	{
 		push_chunk_to_b(a, b, chunk_max, chunk_min);
 		chunk_max += chunk_size;
