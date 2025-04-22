@@ -27,23 +27,7 @@ int	find_biggest_node(t_stack_list *stack)
 	}
 	return (biggest);
 }
-void	set_median(t_stack_list *stack)
-{
-	int	curr_pos;
-	int	median;
 
-	curr_pos = 0;
-	median = stack_len(stack) / 2;
-	while (stack)
-	{
-		if (curr_pos <= median)
-			stack->is_above_med = 1;
-		else
-			stack->is_above_med = 0;
-		curr_pos++;
-		stack = stack->next;
-	}
-}
 void	set_index(t_stack_list **stack)
 {
 	t_stack_list	*tmp;
@@ -52,7 +36,7 @@ void	set_index(t_stack_list **stack)
 	int				index;
 
 	i = 0;
-	set_median(*stack);
+
 	tmp = *stack;
 	while (tmp)
 	{

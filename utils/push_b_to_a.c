@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
 static t_stack_list	*take_min(t_stack_list *stack)
 {
 	t_stack_list	*min_node;
@@ -32,12 +31,13 @@ static t_stack_list	*take_min(t_stack_list *stack)
 	}
 	return (min_node);
 }
+
 static void	set_targets(t_stack_list *a, t_stack_list *b)
 {
 	int				closest_bigger;
 	t_stack_list	*target;
 	t_stack_list	*tmp;
-
+	
 	tmp = a;
 	closest_bigger = INT_MAX;
 	target = NULL;
@@ -51,27 +51,24 @@ static void	set_targets(t_stack_list *a, t_stack_list *b)
 		tmp = tmp->next;
 	}
 	if (closest_bigger == INT_MAX)
-		b->target = find_smallest_node(a);
+		b->target = take_min(a);
 	else
 		b->target = target;
 }
-static void	calculate_cost(t_stack_list *a, t_stack_list *b)
+static void	calculate_cost(t_stack_list *a, t_stack_list *b_head, t_stack_list *curr)
 {
-	int	pos_a;
-	int	pos_b;
 
-	if (!b || !b->target)
+
+	if (!b_head || !b_head->target)
 		return ;
-	pos_a = get_curr_position(a, b->target->n);
-	pos_b = get_curr_position(b, b->n);
-	if (pos_b <= stack_len(b) / 2)
-		b->cost = pos_b;
+	if (curr->curr_pos <= stack_len(b_head) / 2)
+		curr->cost = curr->curr_pos;
 	else
-		b->cost = stack_len(b) - pos_b;
-	if (pos_a <= stack_len(a) / 2)
-		b->cost = b->cost + pos_a;
+		curr->cost = stack_len(b_head) - curr->curr_pos;
+	if (curr->target->curr_pos <= stack_len(a) / 2)
+		curr->cost = curr->cost + curr->target->curr_pos;
 	else
-		b->cost = b->cost + stack_len(a) - pos_a;
+		curr->cost = curr->cost + stack_len(a) - curr->target->curr_pos;
 }
 
 static t_stack_list	*find_low_cost_node(t_stack_list *b)
@@ -103,46 +100,44 @@ static void	prepare_for_push(t_stack_list *a, t_stack_list *b)
 	while (tmp)
 	{
 		set_targets(a, tmp);
-		calculate_cost(a, tmp);
+		calculate_cost(a, b, tmp);
 		tmp = tmp->next;
 	}
 }
-static void	rotate_stacks(t_stack_list **a, t_stack_list **b, int pos_a,
-		int pos_b, t_stack_list *low_cost_node)
+static void	rotate_stacks(t_stack_list **a, t_stack_list **b, t_stack_list *low_cost_node)
 {
-	if (pos_b <= stack_len(*b) / 2 && pos_a <= stack_len(*a) / 2)
+	if (low_cost_node->curr_pos <= stack_len(*b) / 2 && low_cost_node->target->curr_pos <= stack_len(*a) / 2)
 		while (*a != low_cost_node->target && *b != low_cost_node)
 			rr(a, b);
-	if (pos_a > stack_len(*a) / 2 && pos_b > stack_len(*b) / 2)
+	if (low_cost_node->target->curr_pos > stack_len(*a) / 2 && low_cost_node->curr_pos > stack_len(*b) / 2)
 		while (*a != low_cost_node->target && *b != low_cost_node)
 			rev_rotate_both(a, b);
+	set_index(a);
+	set_index(b);
 }
 static void	find_and_rotate(t_stack_list **a, t_stack_list **b)
 {
 	t_stack_list	*low_cost_node;
-	int				low_cost_node_pos_b;
-	int				low_cost_node_pos_a;
 
 	low_cost_node = find_low_cost_node(*b);
 	if (!low_cost_node || !low_cost_node->target)
 		return ;
-	low_cost_node_pos_b = get_curr_position(*b, low_cost_node->n);
-	low_cost_node_pos_a = get_curr_position(*a, low_cost_node->target->n);
-	rotate_stacks(a, b, low_cost_node_pos_a, low_cost_node_pos_b,
+	rotate_stacks(a, b,
 		low_cost_node);
-	if (get_curr_position(*b, low_cost_node->n) <= stack_len(*b) / 2)
+	if (low_cost_node->curr_pos <= stack_len(*b) / 2)
 		while (*b != low_cost_node)
 			rotate(b, 'b');
-	if (get_curr_position(*b, low_cost_node->n) > stack_len(*b) / 2)
+	if (low_cost_node->curr_pos > stack_len(*b) / 2)
 		while (*b != low_cost_node)
 			rev_rotate(b, 'b');
-	if (get_curr_position(*a, low_cost_node->target->n) <= stack_len(*a) / 2)
+	if (low_cost_node->target->curr_pos <= stack_len(*a) / 2)
 		while (*a != low_cost_node->target)
 			rotate(a, 'a');
-	if (get_curr_position(*a, low_cost_node->target->n) > stack_len(*a) / 2)
+	if (low_cost_node->target->curr_pos > stack_len(*a) / 2)
 		while (*a != low_cost_node->target)
 			rev_rotate(a, 'a');
 	set_index(a);
+	set_index(b);
 }
 void	push_b_to_a(t_stack_list **a, t_stack_list **b)
 {
@@ -152,5 +147,6 @@ void	push_b_to_a(t_stack_list **a, t_stack_list **b)
 		find_and_rotate(a, b);
 		push(b, a, 'a');
 		set_index(a);
+		set_index(b);
 	}
 }

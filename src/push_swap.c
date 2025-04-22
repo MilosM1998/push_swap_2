@@ -62,13 +62,6 @@ int	main(int ac, char **av)
 		av++;
 	init_stack(&a, av, is_split);
 	sort_stack(&a, &b);
-	t_stack_list *curr;
-	curr = a;
-	while (curr)
-	{
-		ft_printf("%d->", curr->n);
-		curr = curr->next;
-	}
 	free_stack(&a);
 	return (0);
 }

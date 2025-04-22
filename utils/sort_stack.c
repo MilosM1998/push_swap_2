@@ -108,13 +108,6 @@ void	sort_big(t_stack_list **a, t_stack_list **b)
 		chunk_max += chunk_size;
 		chunk_min += chunk_size;
 	}
-	t_stack_list *curr;
-	curr = *a;
-	while (curr)
-	{
-		ft_printf("%d->", curr->n);
-		curr = curr->next;
-	}
 	sort_3(a);
 	set_index(a);
 	set_index(b);

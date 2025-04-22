@@ -14,14 +14,12 @@
 
 int	how_many_chunks(int stack_size)
 {
-	if (stack_size <= 50)
-		return (4);
 	if (stack_size <= 100)
-		return (6);
+		return (4);
 	if (stack_size <= 200)
-		return (8);
+		return (6);
 	if (stack_size <= 300)
-		return (9);
+		return (7);
 	if (stack_size <= 400)
 		return (10);
 	else
