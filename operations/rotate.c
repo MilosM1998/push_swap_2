@@ -6,7 +6,7 @@
 /*   By: mmilicev <mmilicev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 22:39:23 by mmilicev          #+#    #+#             */
-/*   Updated: 2025/04/13 00:27:30 by mmilicev         ###   ########.fr       */
+/*   Updated: 2025/04/24 21:21:34 by mmilicev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@ static void	rotate_stack(t_stack_list **stack)
 
 	if (!stack || !(*stack) || !(*stack)->next)
 		return ;
-    last = find_last_node(*stack);
+	last = find_last_node(*stack);
 	last->next = *stack;
 	*stack = (*stack)->next;
 	last->next->next = NULL;
 }
+
 void	rotate(t_stack_list **stack, char stack_name)
 {
 	rotate_stack(stack);
@@ -33,6 +34,7 @@ void	rotate(t_stack_list **stack, char stack_name)
 	else
 		ft_putendl_fd("ROTATE ERROR: Stack name must be a or b!", 2);
 }
+
 void	rr(t_stack_list **a, t_stack_list **b)
 {
 	rotate_stack(a);

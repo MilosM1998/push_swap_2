@@ -6,7 +6,7 @@
 /*   By: mmilicev <mmilicev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 22:39:41 by mmilicev          #+#    #+#             */
-/*   Updated: 2025/04/15 23:31:48 by mmilicev         ###   ########.fr       */
+/*   Updated: 2025/04/23 21:21:54 by mmilicev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	sort_stack(t_stack_list **a, t_stack_list **b)
 	else
 		sort_big(a, b);
 }
+
 int	main(int ac, char **av)
 {
 	t_stack_list	*a;

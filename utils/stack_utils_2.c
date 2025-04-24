@@ -6,26 +6,31 @@
 /*   By: mmilicev <mmilicev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 16:43:33 by mmilicev          #+#    #+#             */
-/*   Updated: 2025/04/15 23:10:45 by mmilicev         ###   ########.fr       */
+/*   Updated: 2025/04/24 20:46:32 by mmilicev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	find_biggest_node(t_stack_list *stack)
+t_stack_list	*find_biggest_node(t_stack_list *stack)
 {
-	int	biggest;
+	t_stack_list	*biggest_node;
+	int				biggest;
 
 	if (!stack)
 		return (0);
-	biggest = stack->n;
+	biggest_node = NULL;
+	biggest = INT_MIN;
 	while (stack)
 	{
 		if (stack->n > biggest)
+		{
 			biggest = stack->n;
+			biggest_node = stack;
+		}
 		stack = stack->next;
 	}
-	return (biggest);
+	return (biggest_node);
 }
 
 void	set_index(t_stack_list **stack)
@@ -36,7 +41,6 @@ void	set_index(t_stack_list **stack)
 	int				index;
 
 	i = 0;
-
 	tmp = *stack;
 	while (tmp)
 	{
@@ -54,6 +58,7 @@ void	set_index(t_stack_list **stack)
 		tmp = tmp->next;
 	}
 }
+
 int	take_max_index(t_stack_list *stack)
 {
 	int	max;
@@ -69,18 +74,45 @@ int	take_max_index(t_stack_list *stack)
 	}
 	return (max);
 }
-int	find_smallest_node(t_stack_list *stack)
-{
-	if (!stack)
-		return (0);
-	int smallest;
 
-	smallest = stack->n;
+t_stack_list	*take_min_node(t_stack_list *stack)
+{
+	t_stack_list	*min_node;
+	long			min_n;
+
+	if (!stack)
+		return (NULL);
+	min_n = LONG_MAX;
+	min_node = NULL;
 	while (stack)
 	{
-		if (stack->n < smallest)
-			smallest = stack->n;
+		if (stack->n < min_n)
+		{
+			min_n = stack->n;
+			min_node = stack;
+		}
 		stack = stack->next;
 	}
-	return (smallest);
+	return (min_node);
+}
+
+t_stack_list	*find_low_cost_node(t_stack_list *b)
+{
+	t_stack_list	*low_cost_node;
+	int				cost;
+
+	if (!b)
+		return (NULL);
+	low_cost_node = NULL;
+	cost = INT_MAX;
+	while (b)
+	{
+		if (b->cost < cost)
+		{
+			cost = b->cost;
+			low_cost_node = b;
+		}
+		b = b->next;
+	}
+	return (low_cost_node);
 }

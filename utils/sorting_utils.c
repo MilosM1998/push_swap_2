@@ -6,7 +6,7 @@
 /*   By: mmilicev <mmilicev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 17:23:54 by mmilicev          #+#    #+#             */
-/*   Updated: 2025/04/15 22:50:27 by mmilicev         ###   ########.fr       */
+/*   Updated: 2025/04/24 22:16:27 by mmilicev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,11 @@
 int	how_many_chunks(int stack_size)
 {
 	if (stack_size <= 100)
-		return (4);
-	if (stack_size <= 200)
-		return (6);
-	if (stack_size <= 300)
-		return (7);
-	if (stack_size <= 400)
-		return (10);
+		return (3);
 	else
-		return (13);
+		return (10);
 }
+
 int	take_index_position(t_stack_list *stack, int index)
 {
 	int	pos;
@@ -69,16 +64,16 @@ static int	take_chunk_pos(t_stack_list *stack, int max, int min)
 void	push_chunk_to_b(t_stack_list **a, t_stack_list **b, int chunk_max,
 		int chunk_min)
 {
-	int	chunk_pos;
+	int	node_pos_in_chunk;
 
 	while (is_in_chunk(*a, chunk_max, chunk_min))
 	{
-		chunk_pos = take_chunk_pos(*a, chunk_max, chunk_min);
-		if (chunk_pos <= stack_len(*a) / 2)
-			while (chunk_pos-- > 0)
+		node_pos_in_chunk = take_chunk_pos(*a, chunk_max, chunk_min);
+		if (node_pos_in_chunk <= stack_len(*a) / 2)
+			while (node_pos_in_chunk-- > 0)
 				rotate(a, 'a');
-		if (chunk_pos > stack_len(*a) / 2)
-			while (chunk_pos++ <= stack_len(*a))
+		if (node_pos_in_chunk > stack_len(*a) / 2)
+			while (node_pos_in_chunk++ <= stack_len(*a))
 				rev_rotate(a, 'a');
 		push(a, b, 'b');
 	}

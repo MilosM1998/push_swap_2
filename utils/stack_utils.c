@@ -6,29 +6,25 @@
 /*   By: mmilicev <mmilicev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 21:25:38 by mmilicev          #+#    #+#             */
-/*   Updated: 2025/04/13 00:24:31 by mmilicev         ###   ########.fr       */
+/*   Updated: 2025/04/23 21:30:39 by mmilicev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	new_node(t_stack_list **a, int n)
+void	calculate_cost(t_stack_list *a, t_stack_list *b_head,
+		t_stack_list *curr)
 {
-	t_stack_list	*last;
-	t_stack_list	*new;
-
-	new = malloc(sizeof(t_stack_list));
-	if (!new)
+	if (!b_head || !b_head->target)
 		return ;
-	new->n = n;
-	new->next = NULL;
-	if (!*a)
-	{
-		*a = new;
-		return ;
-	}
-	last = find_last_node(*a);
-	last->next = new;
+	if (curr->curr_pos <= stack_len(b_head) / 2)
+		curr->cost = curr->curr_pos;
+	else
+		curr->cost = stack_len(b_head) - curr->curr_pos;
+	if (curr->target->curr_pos <= stack_len(a) / 2)
+		curr->cost = curr->cost + curr->target->curr_pos;
+	else
+		curr->cost = curr->cost + stack_len(a) - curr->target->curr_pos;
 }
 
 t_stack_list	*find_last_node(t_stack_list *stack)
@@ -40,6 +36,7 @@ t_stack_list	*find_last_node(t_stack_list *stack)
 		tmp = tmp->next;
 	return (tmp);
 }
+
 long	ft_atol(char *str)
 {
 	int		i;
@@ -53,7 +50,8 @@ long	ft_atol(char *str)
 		i++;
 	if (str[i] == '-' || str[i] == '+')
 	{
-		sign = -1;
+		if (str[i] == '-')
+			sign = -1;
 		i++;
 	}
 	while (ft_isdigit(str[i]))
@@ -63,9 +61,10 @@ long	ft_atol(char *str)
 	}
 	return (res * sign);
 }
+
 int	stack_len(t_stack_list *stack)
 {
-	int				len;
+	int	len;
 
 	if (!stack)
 		return (0);
@@ -77,6 +76,7 @@ int	stack_len(t_stack_list *stack)
 	}
 	return (len);
 }
+
 int	is_sorted(t_stack_list *stack)
 {
 	if (!stack || !stack->next)

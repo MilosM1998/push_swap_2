@@ -6,30 +6,31 @@
 /*   By: mmilicev <mmilicev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 22:36:28 by mmilicev          #+#    #+#             */
-/*   Updated: 2025/04/12 16:15:07 by mmilicev         ###   ########.fr       */
+/*   Updated: 2025/04/24 22:12:52 by mmilicev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	check_av(char *av)
+int	check_input(char *str)
 {
 	int	i;
 
 	i = 0;
-	if (av[i] == '-' || av[i] == '+')
+	if (str[i] == '-' || str[i] == '+')
 		i++;
-	if (!ft_isdigit(av[i]))
+	if (!ft_isdigit(str[i]))
 		return (1);
-	while (av[i])
+	while (str[i])
 	{
-		if (!ft_isdigit(av[i]))
+		if (!ft_isdigit(str[i]))
 			return (1);
 		i++;
 	}
 	return (0);
 }
-int	check_if_dup(t_stack_list **stack, long n)
+
+int	check_if_dup(t_stack_list **stack, int n)
 {
 	t_stack_list	*tmp;
 

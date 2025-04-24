@@ -6,7 +6,7 @@
 /*   By: mmilicev <mmilicev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 20:31:02 by mmilicev          #+#    #+#             */
-/*   Updated: 2025/04/12 16:37:30 by mmilicev         ###   ########.fr       */
+/*   Updated: 2025/04/23 19:03:21 by mmilicev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,3 @@ void	free_stack(t_stack_list **stack)
 	}
 	*stack = NULL;
 }
-

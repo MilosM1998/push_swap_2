@@ -6,7 +6,7 @@
 /*   By: mmilicev <mmilicev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 18:29:24 by mmilicev          #+#    #+#             */
-/*   Updated: 2025/04/08 22:39:34 by mmilicev         ###   ########.fr       */
+/*   Updated: 2025/04/23 19:00:27 by mmilicev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,13 @@ void	sa(t_stack_list **a)
 	swap(a);
 	ft_putendl_fd("sa", 1);
 }
+
 void	sb(t_stack_list **b)
 {
 	swap(b);
 	ft_putendl_fd("sb", 1);
 }
+
 void	ss(t_stack_list **a, t_stack_list **b)
 {
 	swap(a);
