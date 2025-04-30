@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmilicev <mmilicev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/13 17:23:54 by mmilicev          #+#    #+#             */
-/*   Updated: 2025/04/24 22:16:27 by mmilicev         ###   ########.fr       */
+/*   Created: 2025/04/30 09:37:45 by mmilicev          #+#    #+#             */
+/*   Updated: 2025/04/30 09:37:48 by mmilicev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	how_many_chunks(int stack_size)
 {
 	if (stack_size <= 100)
-		return (3);
+		return (4);
 	else
 		return (10);
 }

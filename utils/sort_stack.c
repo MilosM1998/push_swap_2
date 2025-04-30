@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmilicev <mmilicev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/12 17:09:10 by mmilicev          #+#    #+#             */
-/*   Updated: 2025/04/24 21:57:17 by mmilicev         ###   ########.fr       */
+/*   Created: 2025/04/30 09:37:40 by mmilicev          #+#    #+#             */
+/*   Updated: 2025/04/30 11:11:05 by mmilicev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	sort_4_5(t_stack_list **a, t_stack_list **b)
 				rev_rotate(a, 'a');
 		}
 		push(a, b, 'b');
+		set_index(a);
 	}
 	sort_3(a);
 	if (stack_len(*b) == 2)
