@@ -6,7 +6,7 @@
 /*   By: mmilicev <mmilicev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 09:37:26 by mmilicev          #+#    #+#             */
-/*   Updated: 2025/04/30 11:03:35 by mmilicev         ###   ########.fr       */
+/*   Updated: 2025/04/30 12:12:41 by mmilicev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static t_stack_list	*new_node(t_stack_list **a, int n)
 	}
 	return (new);
 }
+
 static int	is_there_space(char *str)
 {
 	while (*str)
@@ -45,6 +46,7 @@ static int	is_there_space(char *str)
 	}
 	return (0);
 }
+
 static char	**do_split(t_stack_list **stack, char *av)
 {
 	long			n;
@@ -54,8 +56,8 @@ static char	**do_split(t_stack_list **stack, char *av)
 
 	i = 0;
 	split = ft_split(av, ' ');
-	if (!split)
-		return (NULL);
+	if (!split || !split[1])
+		free_error(stack, split, 1);
 	while (split[i])
 	{
 		if (check_input(split[i]))
@@ -72,6 +74,7 @@ static char	**do_split(t_stack_list **stack, char *av)
 	}
 	return (split);
 }
+
 static void	allocate_node(t_stack_list **stack, char *av)
 {
 	long			n;
@@ -88,6 +91,7 @@ static void	allocate_node(t_stack_list **stack, char *av)
 	if (!node)
 		free_error(stack, NULL, 0);
 }
+
 void	init_stack(t_stack_list **stack, char **av)
 {
 	int		i;
