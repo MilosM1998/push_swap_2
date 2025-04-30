@@ -6,7 +6,7 @@
 /*   By: mmilicev <mmilicev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 09:37:15 by mmilicev          #+#    #+#             */
-/*   Updated: 2025/04/30 09:37:16 by mmilicev         ###   ########.fr       */
+/*   Updated: 2025/04/30 14:08:21 by mmilicev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,24 @@ int	check_if_dup(t_stack_list **stack, int n)
 		tmp = tmp->next;
 	}
 	return (0);
+}
+
+int	is_empty(char **split)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (split[i])
+	{
+		j = 0;
+		while (split[i][j])
+		{
+			if (split[i][j] != ' ' || split[i][j] != '\t')
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
 }

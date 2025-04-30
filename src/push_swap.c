@@ -6,7 +6,7 @@
 /*   By: mmilicev <mmilicev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 09:36:04 by mmilicev          #+#    #+#             */
-/*   Updated: 2025/04/30 12:14:21 by mmilicev         ###   ########.fr       */
+/*   Updated: 2025/04/30 13:17:33 by mmilicev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,6 @@ int	main(int ac, char **av)
 	b = NULL;
 	if (ac == 1)
 		return (1);
-	if (av[1][0] == '\0')
-	{
-		ft_putendl_fd("Error", 2);
-		return (1);
-	}
 	av++;
 	init_stack(&a, av);
 	sort_stack(&a, &b);

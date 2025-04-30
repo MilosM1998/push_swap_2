@@ -6,7 +6,7 @@
 /*   By: mmilicev <mmilicev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 09:37:05 by mmilicev          #+#    #+#             */
-/*   Updated: 2025/04/30 10:20:21 by mmilicev         ###   ########.fr       */
+/*   Updated: 2025/04/30 14:07:33 by mmilicev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int						how_many_chunks(int stack_size);
 t_stack_list			*find_low_cost_node(t_stack_list *b);
 void					calculate_cost(t_stack_list *a, t_stack_list *b_head,
 							t_stack_list *curr);
-
+int						is_empty(char **split);
 //						checkers
 
 int						check_if_dup(t_stack_list **stack, int n);

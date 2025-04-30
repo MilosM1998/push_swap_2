@@ -6,7 +6,7 @@
 /*   By: mmilicev <mmilicev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 09:37:26 by mmilicev          #+#    #+#             */
-/*   Updated: 2025/04/30 12:12:41 by mmilicev         ###   ########.fr       */
+/*   Updated: 2025/04/30 14:07:46 by mmilicev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static char	**do_split(t_stack_list **stack, char *av)
 
 	i = 0;
 	split = ft_split(av, ' ');
-	if (!split || !split[1])
+	if (!split || is_empty(split))
 		free_error(stack, split, 1);
 	while (split[i])
 	{
