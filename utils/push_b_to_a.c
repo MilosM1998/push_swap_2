@@ -6,7 +6,7 @@
 /*   By: mmilicev <mmilicev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 09:37:34 by mmilicev          #+#    #+#             */
-/*   Updated: 2025/04/30 09:37:35 by mmilicev         ###   ########.fr       */
+/*   Updated: 2025/05/02 21:15:59 by mmilicev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	push_b_to_a(t_stack_list **a, t_stack_list **b)
 	if (!(*a))
 	{
 		biggest = find_biggest_node(*b);
-		while (*b != biggest)
+		while ((*b)->n != biggest->n)
 		{
 			if (biggest->curr_pos <= stack_len(*b) / 2)
 				rotate(b, 'b');

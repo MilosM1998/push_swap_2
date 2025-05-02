@@ -6,7 +6,7 @@
 /*   By: mmilicev <mmilicev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 09:37:45 by mmilicev          #+#    #+#             */
-/*   Updated: 2025/04/30 09:37:48 by mmilicev         ###   ########.fr       */
+/*   Updated: 2025/05/02 21:05:40 by mmilicev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void	push_chunk_to_b(t_stack_list **a, t_stack_list **b, int chunk_max,
 	while (is_in_chunk(*a, chunk_max, chunk_min))
 	{
 		node_pos_in_chunk = take_chunk_pos(*a, chunk_max, chunk_min);
+		if (node_pos_in_chunk == -1)
+			return ;
 		if (node_pos_in_chunk <= stack_len(*a) / 2)
 			while (node_pos_in_chunk-- > 0)
 				rotate(a, 'a');
